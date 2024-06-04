@@ -13,7 +13,7 @@ import { buttonVariants } from '@/components/ui/button'
     </div>
 
     <div
-        class="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+        class="container relative hidden h-screen flex-col items-center bg-green-50 justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <a href="/examples/authentication" :class="cn(
             buttonVariants({ variant: 'default' }),
             'absolute right-4 top-4 md:right-8 md:top-8',
