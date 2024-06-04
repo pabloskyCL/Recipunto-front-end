@@ -1,8 +1,15 @@
 <script setup lang="ts">
+
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'vue-router';
 
-defineProps<{ msg: string }>()
+const router = useRouter();
+// defineProps<{ msg: string }>()
+
+function goToLogin() {
+  router.push('/login');
+}
 
 const count = ref(0)
 </script>
@@ -13,7 +20,7 @@ const count = ref(0)
   </h1>
 
   <div class="card">
-    <Button @click="count++">Count is {{ count }}</Button>
+    <Button @click="goToLogin()">Count is {{ count }}</Button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
