@@ -1,27 +1,20 @@
 <script setup lang="ts">
-import UserAuthForm from './forms/UserAuthForm.vue'
+import RegisterForm from './forms/RegisterForm.vue'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 </script>
 
 <template>
-    <div class="md:hidden">
-        <VPImage alt="Authentication" width="1280" height="1214" class="block" :image="{
-            dark: '/examples/authentication-dark.png',
-            light: '/examples/authentication-light.png',
-        }" />
-    </div>
-
     <div
         class="container relative hidden h-screen flex-col items-center bg-green-50 justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <router-link to="register" :class="cn(
+        <router-link to="/login" :class="cn(
             buttonVariants({ variant: 'default' }),
             'absolute right-4 top-4 md:right-8 md:top-8',
         )">
-            Registrate
+            Iniciar sesión
         </router-link>
         <div class="relative hidden h-full flex-col bg-muted p-10 text-black dark:border-r lg:flex">
-            <div class="absolute inset-0 bg-[url('@/assets/recipuntoLogin.jpg')] bg-no-repeat bg-cover bg-bottom" />
+            <div class="absolute inset-0 bg-[url('@/assets/recipuntoRegister.jpg')] bg-no-repeat bg-cover bg-bottom" />
             <div class="relative z-20 flex items-center text-xl font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="mr-2 h-8 w-8">
@@ -34,7 +27,7 @@ import { buttonVariants } from '@/components/ui/button'
             <div class="relative z-20 mt-auto">
                 <blockquote class="space-y-2">
                     <p class="text-3xl text-white">
-                        &ldquo;Bienvenido vamos a aportar con nuestro granito de arena con el medio ambiente.&rdquo;
+                        &ldquo;Unete a recipunto y ayudémonos a crear conciencia con el medio ambiente.&rdquo;
                     </p>
                     <footer class="text-sm">
                         Equipo de recipunto
@@ -43,18 +36,18 @@ import { buttonVariants } from '@/components/ui/button'
             </div>
         </div>
         <div class="lg:p-8">
-            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px]">
                 <div class="flex flex-col space-y-2 text-center">
                     <h1 class="text-2xl font-semibold tracking-tight">
-                        Iniciar Sesión
+                        Registro
                     </h1>
                     <p class="text-sm text-muted-foreground">
-                        Ingresa tu usuario y contraseña
+                        Ingresa tus datos para completar el registro.
                     </p>
                 </div>
-                <UserAuthForm />
+                <RegisterForm />
                 <p class="px-8 text-center text-sm text-muted-foreground">
-                    By clicking continue, you agree to our
+                    Haciendo click en registrarse, estas de acuerdo con nuestros terminos y condiciones.
                     <a href="/terms" class="underline underline-offset-4 hover:text-primary">
                         Terms of Service
                     </a>

@@ -36,8 +36,8 @@ async function onSubmit(event: Event) {
                     <Input id="password" placeholder="Contraseña" type="password" auto-capitalize="none"
                         auto-complete="password" auto-correct="off" :disabled="isLoading" />
                     <p class="text-sm text-muted-foreground place-self-center my-2">
-                        aun no tienes cuenta?. <a href="#"
-                            class="underline underline-offset-4 hover:text-primary">registraté</a>
+                        aun no tienes cuenta?. <router-link to="/register"
+                            class="underline underline-offset-4 hover:text-primary">registraté</router-link>
                     </p>
                 </div>
 

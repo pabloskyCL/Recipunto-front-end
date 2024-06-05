@@ -21,6 +21,8 @@ const count = ref(0)
 
   <div class="card">
     <Button @click="goToLogin()">Count is {{ count }}</Button>
+    <router-link to="/login">iniciar sesión</router-link>
+    <router-link to="/register">registrarse</router-link>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
