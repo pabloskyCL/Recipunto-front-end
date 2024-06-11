@@ -1,12 +1,17 @@
 <script setup lang="ts">
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const router = useRouter();
+const { token } = useAuthStore();
 // defineProps<{ msg: string }>()
 
+onMounted(() => {
+  console.log(token);
+})
 function goToLogin() {
   router.push('/login');
 }

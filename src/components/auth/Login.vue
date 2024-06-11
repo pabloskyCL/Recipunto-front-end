@@ -5,12 +5,6 @@ import { buttonVariants } from '@/components/ui/button'
 </script>
 
 <template>
-    <div class="md:hidden">
-        <VPImage alt="Authentication" width="1280" height="1214" class="block" :image="{
-            dark: '/examples/authentication-dark.png',
-            light: '/examples/authentication-light.png',
-        }" />
-    </div>
 
     <div
         class="container relative hidden h-screen flex-col items-center bg-green-50 justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">

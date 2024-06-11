@@ -11,7 +11,9 @@ import DatePicker from '@/components/compositionElements/formElements/DatePicker
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import { useAuthStore } from '@/stores/auth'
 
+const { register, error } = useAuthStore();
 const isLoading = ref(false)
 
 const formSchema = toTypedSchema(z.object({
@@ -34,36 +36,26 @@ const formSchema = toTypedSchema(z.object({
     }).email({ message: 'email ingresado invalido' }),
     password: z.string({
         required_error: 'no haz ingresado una contraseña'
-    }),
+    }).min(8),
     address: z.string({
         required_error: 'falta el campo dirección'
     }),
     postalCode: z.optional(z.string()),
 }))
 
-const { handleSubmit, setFieldValue, values } = useForm({
+const { handleSubmit, setFieldValue } = useForm({
     validationSchema: formSchema
 })
 
-console.log(values);
+const onSubmit = handleSubmit(async (values) => {
+    isLoading.value = true;
 
-const onSubmit = handleSubmit((values) => {
-    console.log('form submitted!', values)
+    const response = await register(values);
+    console.log(response);
+
+    isLoading.value = false;
+
 })
-
-// async function onSubmit(event: Event) {
-//     event.preventDefault()
-
-//     console.log(event.target);
-
-//     isLoading.value = true
-//     // if (birthday.value.date) {
-//     //     console.log(birthday.value.date);
-//     // }
-//     setTimeout(() => {
-//         isLoading.value = false
-//     }, 3000)
-// }
 </script>
 
 <template>
@@ -112,8 +104,9 @@ const onSubmit = handleSubmit((values) => {
                     <FormField v-slot="{ componentField }" name="password">
                         <FormItem>
                             <FormControl>
-                                <Input v-bind="componentField" placeholder="password" type="password" auto-capitalize="none"
-                                    auto-complete="password" auto-correct="off" :disabled="isLoading" />
+                                <Input v-bind="componentField" placeholder="password" type="password"
+                                    auto-capitalize="none" auto-complete="password" auto-correct="off"
+                                    :disabled="isLoading" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
