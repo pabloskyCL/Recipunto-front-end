@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Button } from '@/components/ui/button'
 
-defineProps<{ msg: string }>()
+import { onMounted, ref } from 'vue'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+
+const router = useRouter();
+const { token } = useAuthStore();
+// defineProps<{ msg: string }>()
+
+onMounted(() => {
+  console.log(token);
+})
+function goToLogin() {
+  router.push('/login');
+}
 
 const count = ref(0)
 </script>
@@ -13,7 +25,9 @@ const count = ref(0)
   </h1>
 
   <div class="card">
-    <Button @click="count++">Count is {{ count }}</Button>
+    <Button @click="goToLogin()">Count is {{ count }}</Button>
+    <router-link to="/login">iniciar sesión</router-link>
+    <router-link to="/register">registrarse</router-link>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

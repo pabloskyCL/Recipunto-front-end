@@ -4,10 +4,10 @@
   "typescript": true,
   "tsConfigPath": "./tsconfig.json",
   "tailwind": {
-    "config": "tailwind.config.js",
-    "css": "src/styles.css",
+    "config": "./tailwind.config.js",
+    "css": "./src/styles.css",
     "baseColor": "slate",
-    "cssVariables": false
+    "cssVariables": true
   },
   "framework": "vite",
   "aliases": {
