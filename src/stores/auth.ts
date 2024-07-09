@@ -11,7 +11,7 @@ export type authState = {
 export type RegisterUserType = {
   firstName: string,
   lastName: string,
-  birthday: string,
+  birthday: Date,
   email: string,
   password: string,
   address: string,
