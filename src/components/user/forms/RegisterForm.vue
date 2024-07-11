@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -7,17 +7,16 @@ import { Input } from '@/components/ui/input'
 import { useForm } from 'vee-validate'
 import { CalendarIcon, LoaderCircleIcon } from 'lucide-vue-next'
 import { RouterLink } from 'vue-router'
-import DatePicker from '@/components/compositionElements/formElements/DatePicker.vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { useAuthStore } from '@/stores/auth'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/v-calendar'
+import { Toaster } from '@/components/ui/toast'
 
-const { register, error } = useAuthStore();
+const { register } = useAuthStore();
 const isLoading = ref(false)
-const today = new Date();
 
 const formSchema = toTypedSchema(z.object({
     firstName: z.string({
@@ -53,9 +52,17 @@ const { handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
     isLoading.value = true;
+    const payload = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        address: values.address,
+        email: values.email,
+        password: values.password,
+        postalCode: values.postalCode,
+        birthday: format(values.birthday, 'yyyy-MM-dd')
+    }
 
-    const response = await register(values);
-    console.log(response);
+    await register(payload);
 
     isLoading.value = false;
 
@@ -163,7 +170,6 @@ const onSubmit = handleSubmit(async (values) => {
                 </Button>
             </div>
         </form>
-
-
+        <Toaster />
     </div>
 </template>

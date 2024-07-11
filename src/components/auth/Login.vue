@@ -2,6 +2,7 @@
 import UserAuthForm from './forms/UserAuthForm.vue'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { Toaster } from '../ui/toast';
 </script>
 
 <template>
@@ -61,4 +62,5 @@ import { buttonVariants } from '@/components/ui/button'
             </div>
         </div>
     </div>
+    <Toaster />
 </template>

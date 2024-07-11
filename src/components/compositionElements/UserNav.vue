@@ -12,13 +12,18 @@ import {
     DropdownMenuSeparator,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuShortcut
 } from '../ui/dropdown-menu';
-import { Button } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
+import { useAuthStore } from '@/stores/auth';
+import { cn } from '@/lib/utils';
+
+const authStore = useAuthStore();
+console.log(authStore.user);
+
 </script>
 
 <template>
-    <DropdownMenu>
+    <DropdownMenu v-if="authStore.user">
         <DropdownMenuTrigger as-child>
             <Button variant="ghost" class="relative h-10 w-10 rounded-full">
                 <Avatar class="h-10 w-10">
@@ -31,10 +36,10 @@ import { Button } from '../ui/button';
             <DropdownMenuLabel class="font-normal flex">
                 <div class="flex flex-col space-y-1">
                     <p class="text-sm font-medium leading-none">
-                        nombre y apellido
+                        {{ authStore.user.first_name }}
                     </p>
                     <p class="text-xs leading-none text-muted-foreground">
-                        correo@test.cl
+                        {{ authStore.user.email }}
                     </p>
                 </div>
             </DropdownMenuLabel>
@@ -48,9 +53,14 @@ import { Button } from '../ui/button';
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem @click="authStore.logout()">
                 Cerrar sesión
             </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
+    <router-link to="/login" :class="cn(
+        buttonVariants({ variant: 'default' }),
+    )" v-show="!authStore.user">
+        Iniciar sesión
+    </router-link>
 </template>
