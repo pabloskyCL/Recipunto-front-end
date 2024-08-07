@@ -50,7 +50,9 @@ export const useAuthStore = defineStore({
         },
         async login(form: LoginUserType) {
             // await this.getToken();
-            await axios.post('http://localhost/api/login_check', form).then(
+            await axios.post('http://localhost/api/login_check', form, {
+                withCredentials: true
+            }).then(
                 (res) => {
                     this.authToken = res.data.token;
                     this.authUser = res.data.data;
@@ -71,8 +73,10 @@ export const useAuthStore = defineStore({
         },
         async register(form: RegisterUserType) {
             // await this.getToken();
-            await axios.post('http://localhost/api/register', form).then(
-                (res) => {
+            await axios.post('http://localhost/api/register', form, {
+                withCredentials: true
+            }).then(
+                () => {
                     this.$router.push('/login').then(() => {
                         toast({
                             title: 'Registro exitoso',

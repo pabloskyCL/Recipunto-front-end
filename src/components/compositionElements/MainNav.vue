@@ -10,7 +10,9 @@ import {
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
 import { MapPin, Recycle, Leaf, ArrowBigDownDash, ListChecksIcon } from 'lucide-vue-next';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 
 </script>
 
@@ -26,7 +28,7 @@ import { MapPin, Recycle, Leaf, ArrowBigDownDash, ListChecksIcon } from 'lucide-
             <DropdownMenuContent class="w-56">
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem @click="() => { router.push('/recipoints') }">
                         <MapPin class="mr-2 h-4 w-4" />
                         <span>Buscar Recipuntos mas cercano</span>
                     </DropdownMenuItem>
