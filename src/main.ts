@@ -5,9 +5,10 @@ import 'v-calendar/style.css';
 import App from './App.vue';
 import router from './router/router';
 import { createPersistedState } from 'pinia-plugin-persistedstate';
+import 'leaflet-spin/leaflet.spin'
 
 const pinia = createPinia();
-pinia.use(({store})=> {
+pinia.use(({ store }) => {
   store.$router = markRaw(router)
 })
 pinia.use(createPersistedState())

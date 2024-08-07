@@ -2,13 +2,14 @@
 import UserAuthForm from './forms/UserAuthForm.vue'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { Toaster } from '../ui/toast';
 </script>
 
 <template>
 
     <div
         class="container relative hidden h-screen flex-col items-center bg-green-50 justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <router-link to="register" :class="cn(
+        <router-link to="/register" :class="cn(
             buttonVariants({ variant: 'default' }),
             'absolute right-4 top-4 md:right-8 md:top-8',
         )">
@@ -61,4 +62,5 @@ import { buttonVariants } from '@/components/ui/button'
             </div>
         </div>
     </div>
+    <Toaster />
 </template>

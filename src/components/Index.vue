@@ -2,12 +2,11 @@
 
 import { onMounted, ref } from 'vue'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import Recipuntoicon from './compositionElements/icons/recipuntoicon.vue';
 import { LucideListTodo, MapPinnedIcon, LucideBarChart4 } from 'lucide-vue-next';
+import { Toaster } from './ui/toast';
 
-const router = useRouter();
 const { token } = useAuthStore();
 // defineProps<{ msg: string }>()
 
@@ -93,7 +92,8 @@ const count = ref(0)
                 <p class="text-xl text-white font-bold">
                   Estadisticas
                 </p>
-                <p class="text-lg text-white">Cada vez que recicles estaras aportando con la reducción de emisiones de Co2, que requiere el material que estas reciclando.
+                <p class="text-lg text-white">Cada vez que recicles estaras aportando con la reducción de emisiones de
+                  Co2, que requiere el material que estas reciclando.
 
                 </p>
               </div>
@@ -105,4 +105,5 @@ const count = ref(0)
       </div>
     </div>
   </div>
+  <Toaster />
 </template>
