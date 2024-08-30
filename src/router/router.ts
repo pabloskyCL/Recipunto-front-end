@@ -1,20 +1,27 @@
-import {  Router, createRouter, createWebHistory } from "vue-router";
-import LogIn from "@/components/auth/Login.vue";
+import { Router, createRouter, createWebHistory } from "vue-router";
 import Layout from "@/components/layaout/layout.vue";
 
 const routes = [
-  { path: '/',
+  {
+    path: '/',
     meta: { layout: Layout },
-    component: () => import('@/components/Index.vue')},
-  { path: '/recipoints',
+    component: () => import('@/components/Index.vue')
+  },
+  {
+    path: '/recipoints',
     meta: { layout: Layout },
     component: () => import('@/components/Recipoint/Recipoint.vue')
   },
+  {
+    path: '/recycle',
+    meta: { layout: Layout },
+    component: () => import('@/components/recycle/Recycle.vue')
+  },
   { path: '/register', component: () => import('@/components/user/Register.vue') },
-  { path: '/login', component: LogIn }
+  { path: '/login', component: () => import('@/components/auth/Login.vue') }
 ];
 
-const router:Router = createRouter({
+const router: Router = createRouter({
   history: createWebHistory(),
   routes
 });
