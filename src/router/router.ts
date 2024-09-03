@@ -13,12 +13,17 @@ const routes = [
     component: () => import('@/components/Recipoint/Recipoint.vue')
   },
   {
+    path: '/recipoint/:recipoint_id',
+    meta: { layout: Layout },
+    component: () => import('@/components/Recipoint/RecipointDetails.vue')
+  },
+  {
     path: '/recycle',
     meta: { layout: Layout },
     component: () => import('@/components/recycle/Recycle.vue')
   },
   { path: '/register', component: () => import('@/components/user/Register.vue') },
-  { path: '/login', component: () => import('@/components/auth/Login.vue') }
+  { path: '/login', component: () => import('@/components/auth/Login.vue') },
 ];
 
 const router: Router = createRouter({
