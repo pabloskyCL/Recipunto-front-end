@@ -5,16 +5,40 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui
 import { Button } from '../ui/button';
 import RatingDetail from '../compositionElements/review/RatingDetail.vue';
 import { BarChart } from '../ui/chart-bar';
+import { onBeforeMount, ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
-const data = [
-    { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-    { name: 'Jul', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-];
+const recipointData = ref<{
+    addressName: string,
+    municipalityName: string,
+    regionName: string,
+    countRecycles: number,
+    totalQuantity: number,
+    totalSavedCo2: number
+    allMaterialRecycles: {
+        name: string,
+        totalWeight: number
+    }[]
+}>({
+    addressName: '',
+    countRecycles: 0,
+    municipalityName: '',
+    regionName: '',
+    allMaterialRecycles: [],
+    totalQuantity: 0,
+    totalSavedCo2: 0
+
+});
+
+onBeforeMount(async () => {
+    const { currentRoute } = useRouter();
+    const recipoint_id = currentRoute.value.params.recipoint_id;
+    const { data } = await axios.get(`http://localhost/recipoint/${recipoint_id}`);
+    recipointData.value = data;
+    console.log(data);
+
+})
 
 </script>
 
@@ -24,9 +48,12 @@ const data = [
             <Card>
                 <CardHeader class="flex flex-row items-center">
                     <div class="grid gap-2">
-                        <CardTitle>Recipoint Name</CardTitle>
+                        <CardTitle>{{ recipointData?.addressName }}</CardTitle>
                         <CardDescription>
-                            Recipoint Details.
+                            Región: {{ recipointData?.regionName }}
+                        </CardDescription>
+                        <CardDescription>
+                            Comuna: {{ recipointData?.municipalityName }}
                         </CardDescription>
                     </div>
                     <Button as-child size="sm" class="ml-auto gap-1">
@@ -38,10 +65,13 @@ const data = [
                 </CardHeader>
                 <CardContent class="grid">
                     <span>Ubicación:(link a google maps con las coordenadas)</span>
-                    <span>Reciclajes registrados:total reciclado</span>
-                    <span>Materiales: (grafico con la cantidad cantidad reciclada total por material en un periodo de
-                        tiempo)</span>
-                    <BarChart index="name" :data="data" :categories="['total', 'predicted']"/>
+                    <span>Total de reciclajes registrados: {{ recipointData?.countRecycles }}</span>
+                    <span>material total reciclado (kg): {{ recipointData?.totalQuantity }}</span>
+                    <span>Materiales reciclados: grafico con la cantidad cantidad reciclada total por material en un
+                        periodo de
+                        tiempo</span>
+                    <BarChart index="name" :colors="['teal']" :data="recipointData?.allMaterialRecycles"
+                        :categories="['totalWeight']" />
                 </CardContent>
             </Card>
             <Card>
