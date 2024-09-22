@@ -31,9 +31,12 @@ const recipointData = ref<{
 
 });
 
+const recipointId = ref<Number>();
+
 onBeforeMount(async () => {
     const { currentRoute } = useRouter();
     const recipoint_id = currentRoute.value.params.recipoint_id;
+    recipointId.value = Number(recipoint_id);
     const { data } = await axios.get(`http://localhost/recipoint/${recipoint_id}`);
     recipointData.value = data;
     console.log(data);
@@ -79,7 +82,7 @@ onBeforeMount(async () => {
                     <CardTitle>Valoraciones</CardTitle>
                 </CardHeader>
                 <CardContent class="grid justify-items-center gap-8">
-                    <RatingDetail />
+                    <RatingDetail :recipoint-id="recipointId"/>
                     <Comment />
                 </CardContent>
             </Card>
