@@ -83,7 +83,7 @@ onBeforeMount(async () => {
                 </CardHeader>
                 <CardContent class="grid justify-items-center gap-8">
                     <RatingDetail :recipoint-id="recipointId"/>
-                    <Comment />
+                    <Comment :recipoint-id="recipointId"/>
                 </CardContent>
             </Card>
         </div>
