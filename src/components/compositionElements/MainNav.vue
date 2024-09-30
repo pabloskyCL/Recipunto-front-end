@@ -39,7 +39,8 @@ const router = useRouter();
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
-        <RouterLink to="/" class="flex text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+        <RouterLink to="/recycle"
+            class="flex text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
             <Recycle class="mr-2 h-4 w-4" />
             <span>reciclar</span>
         </RouterLink>
