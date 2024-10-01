@@ -15,36 +15,38 @@ onBeforeMount(async () => {
 
 </script>
 <template>
-    <FormField v-slot="{ componentField }" name="material">
-        <FormItem class="w-1/3">
-            <FormLabel>Material</FormLabel>
-            <Select v-bind="componentField">
+    <div class="flex flex-col items-center mt-20 gap-4">
+        <FormField v-slot="{ componentField }" name="material">
+            <FormItem class="w-1/3">
+                <FormLabel>Material</FormLabel>
+                <Select v-bind="componentField">
+                    <FormControl>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Selecciona un material" />
+                        </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                        <SelectGroup v-if="materials.length > 0">
+                            <SelectItem v-for="(material, index) in materials" :key="index"
+                                :value="String(material.id)">
+                                {{ material.name }}
+                            </SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+                <FormMessage />
+            </FormItem>
+        </FormField>
+
+        <FormField v-slot="{ componentField }" name="weight">
+            <FormItem class="w-1/3">
+                <FormLabel>Peso</FormLabel>
                 <FormControl>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Selecciona un material" />
-                    </SelectTrigger>
+                    <Input type="number" v-bind="componentField" />
                 </FormControl>
-                <SelectContent>
-                    <SelectGroup v-if="materials.length > 0">
-                        <SelectItem v-for="(material, index) in materials" :key="index" :value="String(material.id)">
-                            {{ material.name }}
-                        </SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
-            <FormMessage />
-        </FormItem>
-    </FormField>
+                <FormMessage />
+            </FormItem>
+        </FormField>
 
-    <FormField v-slot="{ componentField }" name="weight">
-        <FormItem class="w-1/3">
-            <FormLabel>Peso</FormLabel>
-            <FormControl>
-                <Input type="number" v-bind="componentField" />
-            </FormControl>
-            <FormMessage />
-        </FormItem>
-    </FormField>
-
-
+    </div>
 </template>

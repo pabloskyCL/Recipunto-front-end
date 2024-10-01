@@ -241,8 +241,10 @@ watchEffect(() => {
                                         distancia: {{ item.distance.toFixed(2) }} km
                                     </div>
                                     <div class="flex flex-row gap-3 mt-5">
-                                        <router-link :to="`/recipoint/${item.recipoint.id}`"><Button>Detalles</Button></router-link>
-                                        <Button>Reciclar</Button>
+                                        <router-link
+                                            :to="`/recipoint/${item.recipoint.id}`"><Button>Detalles</Button></router-link>
+                                        <Button><router-link
+                                                :to="`/recycle/${item.recipoint.id}`">Reciclar</router-link></Button>
                                     </div>
                                 </div>
                                 <Separator class="my-2" />

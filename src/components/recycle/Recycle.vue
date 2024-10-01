@@ -141,47 +141,48 @@ async function onSubmit(values: any) {
 </script>
 
 <template>
-    <Form v-slot="{ meta, values, validate }" as="" keep-values
-        :validation-schema="toTypedSchema(formSchema[stepIndex - 1])">
-        <form @submit="(e) => {
-            e.preventDefault()
-            validate()
+    <div>
+        <Form v-slot="{ meta, values, validate }" as="" keep-values
+            :validation-schema="toTypedSchema(formSchema[stepIndex - 1])">
+            <form @submit="(e) => {
+                e.preventDefault()
+                validate()
 
-            if (stepIndex === steps.length) {
-                onSubmit(values)
-            }
-        }" class="my-20">
-            <Stepper v-model="stepIndex" class="flex w-full mt-5 items-start gap-2">
-                <StepperItem v-for="step in steps" :key="step.step" v-slot="{ state }"
-                    class="relative flex w-full flex-col items-center justify-center" :step="step.step">
-                    <StepperSeparator v-if="step.step !== steps[steps.length - 1].step"
-                        class="absolute left-[calc(50%+20px)] right-[calc(-50%+10px)] top-5 block h-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-green-600" />
+                if (stepIndex === steps.length) {
+                    onSubmit(values)
+                }
+            }" class="my-20">
+                <Stepper v-model="stepIndex" class="flex w-full mt-5 items-start gap-2">
+                    <StepperItem v-for="step in steps" :key="step.step" v-slot="{ state }"
+                        class="relative flex w-full flex-col items-center justify-center" :step="step.step">
+                        <StepperSeparator v-if="step.step !== steps[steps.length - 1].step"
+                            class="absolute left-[calc(50%+20px)] right-[calc(-50%+10px)] top-5 block h-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-green-600" />
 
-                    <StepperTrigger as-child>
-                        <Button :variant="state === 'completed' || state === 'active' ? 'default' : 'outline'"
-                            size="icon" class="z-10 rounded-full shrink-0"
-                            :class="[state === 'active' && 'ring-2 ring-ring ring-offset-2 ring-offset-background']"
-                            :disabled="state !== 'completed' && !meta.valid">
-                            <Check color="#16a34a" v-if="state === 'completed'" class="size-5" />
-                            <Circle v-if="state === 'active'" />
-                            <Dot v-if="state === 'inactive'" />
-                        </Button>
-                    </StepperTrigger>
+                        <StepperTrigger as-child>
+                            <Button :variant="state === 'completed' || state === 'active' ? 'default' : 'outline'"
+                                size="icon" class="z-10 rounded-full shrink-0"
+                                :class="[state === 'active' && 'ring-2 ring-ring ring-offset-2 ring-offset-background']"
+                                :disabled="state !== 'completed' && !meta.valid">
+                                <Check color="#16a34a" v-if="state === 'completed'" class="size-5" />
+                                <Circle v-if="state === 'active'" />
+                                <Dot v-if="state === 'inactive'" />
+                            </Button>
+                        </StepperTrigger>
 
-                    <div class="mt-5 flex flex-col items-center text-center">
-                        <StepperTitle :class="[state === 'active' && 'text-primary']"
-                            class="text-sm font-semibold transition lg:text-base">
-                            {{ step.title }}
-                        </StepperTitle>
-                        <StepperDescription :class="[state === 'active' && 'text-primary']"
-                            class="sr-only text-xs text-muted-foreground transition md:not-sr-only lg:text-sm">
-                            {{ step.description }}
-                        </StepperDescription>
-                    </div>
-                </StepperItem>
-            </Stepper>
+                        <div class="mt-5 flex flex-col items-center text-center">
+                            <StepperTitle :class="[state === 'active' && 'text-primary']"
+                                class="text-sm font-semibold transition lg:text-base">
+                                {{ step.title }}
+                            </StepperTitle>
+                            <StepperDescription :class="[state === 'active' && 'text-primary']"
+                                class="sr-only text-xs text-muted-foreground transition md:not-sr-only lg:text-sm">
+                                {{ step.description }}
+                            </StepperDescription>
+                        </div>
+                    </StepperItem>
+                </Stepper>
 
-            <div class="flex flex-col items-center mt-20 gap-4">
+
                 <template v-if="stepIndex === 1">
                     <StepOne />
                 </template>
@@ -193,23 +194,24 @@ async function onSubmit(values: any) {
                 <template v-if="stepIndex === steps.length">
                     <LastStep />
                 </template>
-            </div>
 
-            <div class="flex w-full items-center space-x-96 justify-center mt-4">
-                <Button :disabled="!canGoBack" variant="outline" size="sm" @click="goBack">
-                    Back
-                </Button>
-                <div class="flex items-center">
-                    <Button v-if="stepIndex !== steps.length" :type="meta.valid ? 'button' : 'submit'"
-                        :disabled="!canGoNext" size="sm" @click="meta.valid && goNext()">
-                        Next
+
+                <div class="flex w-full items-center space-x-96 justify-center mt-4">
+                    <Button :disabled="!canGoBack" variant="outline" size="sm" @click="goBack">
+                        Back
                     </Button>
-                    <Button v-if="stepIndex === steps.length" size="sm" type="submit">
-                        Submit
-                    </Button>
+                    <div class="flex items-center">
+                        <Button v-if="stepIndex !== steps.length" :type="meta.valid ? 'button' : 'submit'"
+                            :disabled="!canGoNext" size="sm" @click="meta.valid && goNext()">
+                            Next
+                        </Button>
+                        <Button v-if="stepIndex === steps.length" size="sm" type="submit">
+                            Submit
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </Form>
-    <Toaster />
+            </form>
+        </Form>
+        <Toaster />
+    </div>
 </template>
