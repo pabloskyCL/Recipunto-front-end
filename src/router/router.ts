@@ -18,7 +18,7 @@ const routes = [
     component: () => import('@/components/Recipoint/RecipointDetails.vue')
   },
   {
-    path: '/recycle',
+    path: '/recycle/:recipoint_id?',
     meta: { layout: Layout },
     component: () => import('@/components/recycle/Recycle.vue')
   },
