@@ -46,6 +46,6 @@ onMounted(() => {
       </div>
       <Features />
     </div>
+    <Toaster />
   </div>
-  <Toaster />
 </template>

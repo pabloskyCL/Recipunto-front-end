@@ -9,6 +9,8 @@ import { onBeforeMount, ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
+const { currentRoute } = useRouter();
+const recipoint_id = currentRoute.value.params.recipoint_id;
 const recipointData = ref<{
     addressName: string,
     municipalityName: string,
@@ -34,8 +36,6 @@ const recipointData = ref<{
 const recipointId = ref<Number>();
 
 onBeforeMount(async () => {
-    const { currentRoute } = useRouter();
-    const recipoint_id = currentRoute.value.params.recipoint_id;
     recipointId.value = Number(recipoint_id);
     const { data } = await axios.get(`http://localhost/recipoint/${recipoint_id}`);
     recipointData.value = data;
@@ -60,10 +60,10 @@ onBeforeMount(async () => {
                         </CardDescription>
                     </div>
                     <Button as-child size="sm" class="ml-auto gap-1">
-                        <a href="#">
+                        <RouterLink :to="`/recycle/${recipoint_id}`">
                             Reciclar
                             <ArrowUpRight class="h-4 w-4" />
-                        </a>
+                        </RouterLink>
                     </Button>
                 </CardHeader>
                 <CardContent class="grid">
@@ -82,8 +82,8 @@ onBeforeMount(async () => {
                     <CardTitle>Valoraciones</CardTitle>
                 </CardHeader>
                 <CardContent class="grid justify-items-center gap-8">
-                    <RatingDetail :recipoint-id="recipointId"/>
-                    <Comment :recipoint-id="recipointId"/>
+                    <RatingDetail :recipoint-id="recipointId" />
+                    <Comment :recipoint-id="recipointId" />
                 </CardContent>
             </Card>
         </div>
