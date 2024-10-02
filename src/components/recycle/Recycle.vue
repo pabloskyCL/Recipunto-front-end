@@ -8,19 +8,22 @@ import { Stepper, StepperDescription, StepperItem, StepperSeparator, StepperTitl
 import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/toast'
-
 import { Toaster } from '../ui/toast';
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import StepOne from './StepOne.vue'
 import StepTwo from './StepTwo.vue'
 import LastStep from './LastStep.vue'
+import LoginValidation from '../auth/Modal/LoginValidation.vue'
+import { useAuthStore } from '@/stores/auth'
+
 
 export interface Material {
     id: number,
     name: string
 }
 
+const authStore = useAuthStore();
 const route = useRoute();
 const recipointParam: any = route.params.recipoint_id;
 
@@ -142,6 +145,7 @@ async function onSubmit(values: any) {
 
 <template>
     <div>
+        <LoginValidation v-if="!authStore.user" />
         <Form v-slot="{ meta, values, validate }" as="" keep-values
             :validation-schema="toTypedSchema(formSchema[stepIndex - 1])">
             <form @submit="(e) => {
