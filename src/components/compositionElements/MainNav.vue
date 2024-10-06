@@ -44,7 +44,8 @@ const router = useRouter();
             <Recycle class="mr-2 h-4 w-4" />
             <span>reciclar</span>
         </RouterLink>
-        <RouterLink to="/" class="flex text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+        <RouterLink to="/myrecycle"
+            class="flex text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
             <Leaf class="mr-2 h-4 w-4" />
             <span>Mi reciclaje</span>
         </RouterLink>
