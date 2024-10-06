@@ -22,6 +22,11 @@ const routes = [
     meta: { layout: Layout },
     component: () => import('@/components/recycle/Recycle.vue')
   },
+  {
+    path: '/myRecycle',
+    meta: { layout: Layout },
+    component: () => import('@/components/user/myRecycle/MyRecycle.vue')
+  },
   { path: '/register', component: () => import('@/components/user/Register.vue') },
   { path: '/login', component: () => import('@/components/auth/Login.vue') },
 ];
