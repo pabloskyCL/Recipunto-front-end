@@ -11,6 +11,7 @@ import { useForm } from 'vee-validate';
 import { ref } from 'vue';
 import { z } from 'zod';
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 const useAuth = useAuthStore();
 const checkPasswordActive = ref(false);
 const changePasswordActive = ref(false);
@@ -33,7 +34,7 @@ const changePasswordForm = useForm({
 
 const onChangePasswordSubmit = changePasswordForm.handleSubmit(async (values) => {
     try {
-        const { data } = await axios.post('http://localhost/api/changePassword', {
+        const { data } = await axios.post(`${BACKENDURL}/api/changePassword`, {
             password: values.password
         }, { withCredentials: true });
         useAuth.logout().then(() => {
@@ -60,7 +61,7 @@ const checkActualPassword = async () => {
     }
 
     try {
-        await axios.post('http://localhost/api/checkActualPassword', {
+        await axios.post(`${BACKENDURL}/api/checkActualPassword`, {
             password: actualPassword.value
         }, { withCredentials: true });
         changePasswordActive.value = !changePasswordActive.value;

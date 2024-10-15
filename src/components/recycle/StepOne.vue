@@ -6,10 +6,11 @@ import { Material } from './Recycle.vue';
 import { onBeforeMount, ref } from 'vue';
 import axios from 'axios';
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 let materials = ref<Material[]>([]);
 
 onBeforeMount(async () => {
-    const { data } = await axios.get('http://localhost/materials');
+    const { data } = await axios.get(`${BACKENDURL}/materials`);
     materials.value = data;
 })
 

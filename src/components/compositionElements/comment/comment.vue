@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import axios from 'axios';
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
+
 const selectedResponses = ref<{
     [key: number]: Array<{
         cfather: number,
@@ -45,7 +47,7 @@ interface Comment {
 const comments = ref<Comment[]>([]);
 
 onBeforeMount(async () => {
-    const { data } = await axios.get(`http://localhost/comment/recipoint/${props.recipointId}`);
+    const { data } = await axios.get(`${BACKENDURL}/comment/recipoint/${props.recipointId}`);
     comments.value = data;
 
     comments.value?.forEach((comment) => {
@@ -75,12 +77,12 @@ const commentsHasResponses = () => {
 }
 
 const addComment = async (comment: Comment,) => {
-    await axios.post('http://localhost/comment', {
+    await axios.post(`${BACKENDURL}/comment`, {
         recipoint_id: props.recipointId,
         subcomment: comment?.commentId,
         content: showResponseBox.value[comment.commentId].text
     }).then(async () => {
-        const { data } = await axios.get('http://localhost/comment/subcomments', {
+        const { data } = await axios.get(`${BACKENDURL}/comment/subcomments`, {
             params: {
                 parentIds: [comment.commentId]
             }
@@ -101,11 +103,11 @@ const newComment = ref<{
 });
 
 const addNewComment = async () => {
-    await axios.post('http://localhost/comment', {
+    await axios.post(`${BACKENDURL}/comment`, {
         recipoint_id: props.recipointId,
         content: newComment.value.content
     }).then(async () => {
-        const { data } = await axios.get(`http://localhost/comment/recipoint/${props.recipointId}`);
+        const { data } = await axios.get(`${BACKENDURL}/comment/recipoint/${props.recipointId}`);
         comments.value = data;
 
         comments.value?.forEach((comment) => {
@@ -121,7 +123,7 @@ const toggleShowSubComments = async (index: number) => {
     showResponseStatus.value[index].show = !showResponseStatus.value[index].show
     const parentHasSubComment = commentsHasResponses();
     if (Object.keys(responses.value).length === 0) {
-        const { data } = await axios.get('http://localhost/comment/subcomments', {
+        const { data } = await axios.get(`${BACKENDURL}/comment/subcomments`, {
             params: {
                 parentIds: parentHasSubComment
             }

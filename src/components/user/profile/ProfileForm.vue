@@ -12,6 +12,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 const router = useRouter();
 const useAuth = useAuthStore();
 let userData = ref<{
@@ -52,7 +53,7 @@ const { handleSubmit, setValues } = useForm({
 
 onMounted(async () => {
     try {
-        const { data } = await axios.get('http://localhost/api/currentUser', { withCredentials: true })
+        const { data } = await axios.get(`${BACKENDURL}/api/currentUser`, { withCredentials: true })
         userData.value = {
             firstName: data.firstName,
             lastName: data.lastName,
@@ -76,7 +77,7 @@ onMounted(async () => {
 
 const onSubmit = handleSubmit(async (values) => {
     try {
-        await axios.post('http://localhost/api/updateUser', values, { withCredentials: true })
+        await axios.post(`${BACKENDURL}/api/updateUser`, values, { withCredentials: true })
         toast({
             title: 'Información actualizada con exito',
             class: 'bg-teal-500'
