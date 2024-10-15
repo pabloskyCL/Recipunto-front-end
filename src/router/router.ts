@@ -1,5 +1,6 @@
 import { Router, createRouter, createWebHistory } from "vue-router";
 import Layout from "@/components/layaout/layout.vue";
+import path from "path";
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/myRecycle',
     meta: { layout: Layout },
     component: () => import('@/components/user/myRecycle/MyRecycle.vue')
+  },
+  {
+    path: '/profile',
+    meta: { layout: Layout },
+    component: () => import('@/components/user/profile/Profile.vue')
   },
   { path: '/register', component: () => import('@/components/user/Register.vue') },
   { path: '/login', component: () => import('@/components/auth/Login.vue') },

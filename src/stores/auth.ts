@@ -33,7 +33,7 @@ export type LoginUserType = {
 }
 
 declare module 'pinia' { export interface PiniaCustomProperties { $router: Router } }
-
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 const { toast } = useToast();
 
 export const useAuthStore = defineStore({
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore({
         },
         async login(form: LoginUserType) {
             // await this.getToken();
-            await axios.post('http://localhost/api/login_check', form, {
+            await axios.post(`${BACKENDURL}/api/login_check`, form, {
                 withCredentials: true
             }).then(
                 (res) => {
@@ -73,7 +73,7 @@ export const useAuthStore = defineStore({
         },
         async register(form: RegisterUserType) {
             // await this.getToken();
-            await axios.post('http://localhost/api/register', form, {
+            await axios.post(`${BACKENDURL}/api/register`, form, {
                 withCredentials: true
             }).then(
                 () => {

@@ -23,6 +23,7 @@ export interface Material {
     name: string
 }
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 const authStore = useAuthStore();
 const route = useRoute();
 const recipointParam: any = route.params.recipoint_id;
@@ -112,15 +113,15 @@ async function onSubmit(values: any) {
 
     }
 
-    const response = await axios.post('http://localhost/recycle', recycleValues, {
+    const response = await axios.post(`${BACKENDURL}/recycle`, recycleValues, {
         withCredentials: true
     }).then(() => {
-        return axios.post('http://localhost/review', reviewRecipointValues, {
+        return axios.post(`${BACKENDURL}/review`, reviewRecipointValues, {
             withCredentials: true
         })
     }).then((reviewRes) => {
         commentRecipointValues.review_id = reviewRes.data.review_id;
-        return axios.post('http://localhost/comment', commentRecipointValues, {
+        return axios.post(`${BACKENDURL}/comment`, commentRecipointValues, {
             withCredentials: true
         })
     }).catch((error) => {

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast, Toaster } from '@/components/ui/toast';
 import { useRouter } from 'vue-router';
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 
 const myRecycle = ref<{
     totalSavedCo2: Array<{
@@ -38,7 +39,7 @@ const router = useRouter();
 
 onBeforeMount(async () => {
     try {
-        const { data } = await axios.get('http://localhost/api/userRecycleData', {
+        const { data } = await axios.get(`${BACKENDURL}/api/userRecycleData`, {
             withCredentials: true,
         });
         myRecycle.value = data;

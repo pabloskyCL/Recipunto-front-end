@@ -18,6 +18,8 @@ let recipointList = ref();
 let selectedRecipoint = ref();
 let direccionText = ref();
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
+
 onBeforeMount(() => {
 
     if (navigator.geolocation) {
@@ -31,7 +33,7 @@ onBeforeMount(() => {
 
 onMounted(async () => {
 
-    const { data } = await axios.get('http://localhost/recipoint', {
+    const { data } = await axios.get(`${BACKENDURL}/recipoint`, {
         withCredentials: true
     });
 
@@ -95,7 +97,7 @@ const searchRecipoint = async () => {
     console.log(direccionText.value);
     map.remove();
 
-    const { data } = await axios.get('http://localhost/recipoint', {
+    const { data } = await axios.get(`${BACKENDURL}/recipoint`, {
         params: {
             address: direccionText.value
         },

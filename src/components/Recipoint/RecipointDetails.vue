@@ -9,6 +9,7 @@ import { onBeforeMount, ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
 const { currentRoute } = useRouter();
 const recipoint_id = currentRoute.value.params.recipoint_id;
 const recipointData = ref<{
@@ -37,7 +38,7 @@ const recipointId = ref<Number>();
 
 onBeforeMount(async () => {
     recipointId.value = Number(recipoint_id);
-    const { data } = await axios.get(`http://localhost/recipoint/${recipoint_id}`);
+    const { data } = await axios.get(`${BACKENDURL}/recipoint/${recipoint_id}`);
     recipointData.value = data;
     console.log(data);
 

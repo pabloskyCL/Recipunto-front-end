@@ -9,6 +9,8 @@ let props = defineProps<{
     recipointId: Number | undefined
 }>();
 
+const BACKENDURL = import.meta.env.VITE_BACKEND_URL
+
 interface RecipointRatingInfo {
     overallRating: string,
     stars: { stars: number, total: number }[],
@@ -19,7 +21,7 @@ const recipointRatingResponse = ref<RecipointRatingInfo>();
 
 onBeforeMount(async () => {
     if (props.recipointId) {
-        const { data } = await axios.get(`http://localhost/recipoint/rating/${props.recipointId}`)
+        const { data } = await axios.get(`${BACKENDURL}/recipoint/rating/${props.recipointId}`)
         recipointRatingResponse.value = data;
         console.log(recipointRatingResponse);
     }
