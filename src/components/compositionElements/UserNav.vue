@@ -46,11 +46,11 @@ console.log(authStore.user);
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 <DropdownMenuItem>
-                    Mi perfil
+                    <router-link to="/profile">Mi perfil</router-link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <!-- <DropdownMenuItem>
                     Cuenta
-                </DropdownMenuItem>
+                </DropdownMenuItem>-->
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem @click="authStore.logout()">
