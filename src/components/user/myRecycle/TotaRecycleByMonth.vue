@@ -11,9 +11,9 @@ const props = defineProps<{
     <Card class="m-5">
         <CardHeader class="flex flex-row items-center">
             <div class="grid gap-2">
-                <CardTitle>Total Co2 mitigados por material(kg).</CardTitle>
+                <CardTitle>Total reciclado por mes(kg).</CardTitle>
                 <CardDescription>
-                    Total emisiones de Co2 mitigados por material de lo que haz reciclado por cada material
+                    Total de todo el material reciclado por mes.
                 </CardDescription>
             </div>
             <!-- TODO: puede sea interesante hacer un boton para compartir una captura de pantalla de tu reciclaje o un compartir pero
